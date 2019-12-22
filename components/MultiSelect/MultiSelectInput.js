@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 
 import { sm, reg, xsm } from "../../assets/Spacing";
 import { darkGrey, lightGrey } from "../../assets/Colors";
@@ -14,12 +14,14 @@ const multiSelectInput = ({ selectedItems, style, onPress }) => (
       <TouchableOpacity onPress={onPress}>
         <SelectedItemsContainer>
           {selectedItems.length === 0 ? (
-            <Placeholder>Add shifts...</Placeholder>
+            <ItemContainer>
+              <Placeholder>Add shifts...</Placeholder>
+            </ItemContainer>
           ) : (
             selectedItems.map(({ label, key }) => (
-              <SelectedItemContainer key={key}>
+              <ItemContainer key={key}>
                 <SelectedItemText key={key}>{label}</SelectedItemText>
-              </SelectedItemContainer>
+              </ItemContainer>
             ))
           )}
         </SelectedItemsContainer>
@@ -39,23 +41,24 @@ const Placeholder = styled.Text`
   color: ${lightGrey};
   font-style: italic;
   padding-left: ${reg};
-  align-self: center;
   font-size: 20;
 `;
 
 const Container = styled.View`
   border-width: 1;
   border-color: ${darkGrey};
+  border-radius: 8;
 `;
 
-const SelectedItemContainer = styled.View`
+const ItemContainer = styled.View`
   justify-content: center;
   align-items: center;
 `;
 
 const SelectedItemsContainer = styled.View`
-  height: 60;
+  min-height: 60;
   flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 const SelectedItemText = styled.Text`
